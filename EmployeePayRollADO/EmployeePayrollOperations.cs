@@ -143,6 +143,43 @@ namespace EmployeePayRollADO
             }
         }
 
+        public int UpdateEmployeeUsingStoredProcedure()
+        {
+            try
+            {
+                SqlCommand command = new SqlCommand("spUpdateEmployeeDetails", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Name", "Teressa");
+                command.Parameters.AddWithValue("@Salary", "3000000");
+
+                sqlConnection.Open();
+                int i = command.ExecuteNonQuery();
+                sqlConnection.Close();
+                if (i >= 1)
+                {
+                    Console.WriteLine("Data Updated sucessfully...");
+                }
+                else
+                {
+                    Console.WriteLine("Something went wrong... ");
+                }
+                return i;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+        }
+
+
+
+
+
         public void DeleteEmployee()
         {
             try
@@ -180,7 +217,7 @@ namespace EmployeePayRollADO
 
             while (choice != 10)
             {
-                Console.WriteLine("\n Enter 1 for Display all records\n Enter 2 for Insert records\n Enter 3 for Update records\n Enter 4 for Update records from table\n Enter 10 for exit ");
+                Console.WriteLine("\n Enter 1 for Display all records\n Enter 2 for Insert records\n Enter 3 for Update records\n Enter 4 for Update records from table\n Enter 5 for Update records using stored procedure\n Enter 10 for exit ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -204,7 +241,9 @@ namespace EmployeePayRollADO
                     case 4:
                         DeleteEmployee();
                         break;
-                    
+                    case 5:
+                        UpdateEmployeeUsingStoredProcedure();
+                        break;
                     default:
                         Console.WriteLine("Enter wrong input");
                         break;
