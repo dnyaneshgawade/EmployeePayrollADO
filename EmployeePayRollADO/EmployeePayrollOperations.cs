@@ -176,7 +176,55 @@ namespace EmployeePayRollADO
 
         }
 
+        public void RetrivePerticularEmployee()
+        {
+            try
+            {
+                SqlCommand command = new SqlCommand("SELECT *FROM EmployeePayRoll WHERE StartDate between @StartDate1 and @StartDate2", sqlConnection);
+                command.CommandType = CommandType.Text;
+                command.Parameters.AddWithValue("@StartDate1", "2018-01-01");
+                command.Parameters.AddWithValue("@StartDate2", "2021-01-01");
 
+                SqlDataAdapter da = new SqlDataAdapter(command);
+                DataTable dt = new DataTable();
+
+                sqlConnection.Open();
+                da.Fill(dt);
+                sqlConnection.Close();
+                foreach (DataRow dr in dt.Rows)
+                {
+
+                    EmpList.Add
+                        (
+
+                        new Employee
+                        {
+
+                            Id = Convert.ToInt32(dr["Id"]),
+                            Name = Convert.ToString(dr["Name"]),
+                            PhoneNumber = Convert.ToDouble(dr["PhoneNumber"]),
+                            Address = Convert.ToString(dr["Address"]),
+                            Gender = Convert.ToString(dr["Gender"]),
+                            Department = Convert.ToString(dr["Department"]),
+                            Startdate = Convert.ToDateTime(dr["Startdate"]),
+                            Salary = Convert.ToDouble(dr["Salary"]),
+                        }
+                        );
+                    if ((EmpList.Count) > 0)
+                    {
+                        Display();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
 
 
 
@@ -217,7 +265,7 @@ namespace EmployeePayRollADO
 
             while (choice != 10)
             {
-                Console.WriteLine("\n Enter 1 for Display all records\n Enter 2 for Insert records\n Enter 3 for Update records\n Enter 4 for Update records from table\n Enter 5 for Update records using stored procedure\n Enter 10 for exit ");
+                Console.WriteLine("\n Enter 1 for Display all records\n Enter 2 for Insert records\n Enter 3 for Update records\n Enter 4 for Update records from table\n Enter 5 for Update records using stored procedure\n Enter 6 for retrive perticular record\n Enter 10 for exit ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -243,6 +291,9 @@ namespace EmployeePayRollADO
                         break;
                     case 5:
                         UpdateEmployeeUsingStoredProcedure();
+                        break;
+                    case 6:
+                        RetrivePerticularEmployee();
                         break;
                     default:
                         Console.WriteLine("Enter wrong input");
