@@ -172,6 +172,9 @@ namespace EmployeePayRollADO
                 sqlConnection.Close();
             }
         }
+
+
+        
         public void EmpDetails()
         {
 
