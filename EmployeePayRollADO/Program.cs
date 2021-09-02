@@ -10,9 +10,6 @@ namespace EmployeePayRollADO
         {
             Console.WriteLine("Wellcome To Employee PayRoll Service!");
             EmployeePayrollOperations employeePayrollOperations = new EmployeePayrollOperations();
-           // Console.WriteLine(employeePayrollOperations.GetAllEmployeeDetails());
-
-           // employeePayrollOperations.GetAllEmployees();
             employeePayrollOperations.EmpDetails();
         }
     }
