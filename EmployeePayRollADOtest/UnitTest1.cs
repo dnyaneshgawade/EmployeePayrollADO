@@ -15,12 +15,5 @@ namespace EmployeePayRollADOtest
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
-        public void GivenEmployeeDetail_AfterExicuteStoredProcedure_ShouldReturnExactUpdatedRecord()
-        {
-            int expected = 1;
-            int actual = emp.UpdateEmployeeUsingStoredProcedure();
-            Assert.AreEqual(expected, actual);
-        }
     }
 }
