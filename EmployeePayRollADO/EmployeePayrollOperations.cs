@@ -258,14 +258,143 @@ namespace EmployeePayRollADO
             }
         }
 
+        public void SumOfSalary()
+        {
+            try
+            {
+                SqlCommand command = new SqlCommand("spSumOfSalary", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Gender", "F");
 
+                sqlConnection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    Console.WriteLine(string.Format("Sum: {0}", reader[0]));
+                }
+                sqlConnection.Close();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public void MaximumSalary()
+        {
+            try
+            {
+                SqlCommand command = new SqlCommand("spMaximumSalary", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Gender", "F");
+
+                sqlConnection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    Console.WriteLine(string.Format("Maximum Salary: {0}", reader[0]));
+                }
+                sqlConnection.Close();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public void MinimumSalary()
+        {
+            try
+            {
+                SqlCommand command = new SqlCommand("spMinimumSalary", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Gender", "F");
+
+                sqlConnection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    Console.WriteLine(string.Format("Minimum Salary: {0}", reader[0]));
+                }
+                sqlConnection.Close();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
         
+
+        public void AverageSalary()
+        {
+            try
+            {
+                SqlCommand command = new SqlCommand("spAverageSalary", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Gender", "F");
+
+                sqlConnection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    Console.WriteLine(string.Format("Average Salary: {0}", reader[0]));
+                }
+                sqlConnection.Close();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+
+        public void CountOfEmployee()
+        {
+            try
+            {
+                SqlCommand command = new SqlCommand("spCountOfEmployee", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Gender", "F");
+
+                sqlConnection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    Console.WriteLine(string.Format("Number Of Employee : {0}", reader[0]));
+                }
+                sqlConnection.Close();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
         public void EmpDetails()
         {
 
-            while (choice != 10)
+            while (choice != 15)
             {
-                Console.WriteLine("\n Enter 1 for Display all records\n Enter 2 for Insert records\n Enter 3 for Update records\n Enter 4 for Update records from table\n Enter 5 for Update records using stored procedure\n Enter 6 for retrive perticular record\n Enter 10 for exit ");
+                Console.WriteLine("\n Enter 1 for Display all records\n Enter 2 for Insert records\n Enter 3 for Update records\n Enter 4 for Update records from table\n Enter 5 for Update records using stored procedure\n Enter 6 for retrive perticular record\n Enter 7 for Display Sum Of Salary\n Enter 8 for Display Maximum Salary\n Enter 9 for Display Minimum Salary\n Enter 10 for Display Average Salary\n Enter 11 for Display Count Of Employee\n Enter 15 for exit ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -294,6 +423,21 @@ namespace EmployeePayRollADO
                         break;
                     case 6:
                         RetrivePerticularEmployee();
+                        break;
+                    case 7:
+                        SumOfSalary();
+                        break;
+                    case 8:
+                        MaximumSalary();
+                        break;
+                    case 9:
+                        MinimumSalary();
+                        break;
+                    case 10:
+                        AverageSalary();
+                        break;
+                    case 11:
+                        CountOfEmployee();
                         break;
                     default:
                         Console.WriteLine("Enter wrong input");
